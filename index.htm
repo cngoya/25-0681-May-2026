@@ -3,138 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bloom &amp; Petal Haven | Flower Shop</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: Georgia, 'Times New Roman', serif;
-            background-color: #f7faf5;
-            color: #2f3e2f;
-            line-height: 1.6;
-        }
-
-        /* Header */
-        header {
-            background-color: #4c7a34;
-            color: #ffffff;
-            text-align: center;
-            padding: 25px 15px;
-        }
-        header .shop-title { font-size: 42px; font-weight: bold; letter-spacing: 1px; }
-        header .tagline { font-size: 18px; font-style: italic; margin-top: 6px; color: #e6f2dc; }
-
-        /* Navigation (sticky so it shows on every section) */
-        nav {
-            background-color: #355d24;
-            text-align: center;
-            padding: 12px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 18px;
-            margin: 0 15px;
-            padding: 6px 4px;
-        }
-        nav a:hover { color: #ffd966; border-bottom: 2px solid #ffd966; }
-
-        /* Sections */
-        section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 50px 20px;
-            scroll-margin-top: 70px;
-        }
-        section:nth-child(even) { background-color: #eef5e8; }
-
-        h1 { color: #355d24; font-size: 34px; margin-bottom: 15px; text-align: center; }
-        h2 { color: #4c7a34; font-size: 24px; margin: 25px 0 12px 0; }
-        p { margin-bottom: 15px; }
-
-        hr { border: none; border-top: 2px solid #c5dcb3; margin: 25px 0; }
-
-        img { border-radius: 8px; }
-
-        .image-row {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .clickable-img { border: 3px solid #4c7a34; transition: transform 0.2s; }
-        .clickable-img:hover { transform: scale(1.03); }
-
-        ul, ol { margin: 0 0 20px 40px; }
-        li { margin-bottom: 8px; }
-
-        table { width: 100%; border-collapse: collapse; margin: 20px 0; background-color: #ffffff; }
-        caption { font-size: 20px; font-weight: bold; color: #355d24; margin-bottom: 10px; }
-        th, td { border: 1px solid #a8c79a; padding: 10px 14px; text-align: left; }
-        th { background-color: #4c7a34; color: #ffffff; }
-        tr:nth-child(even) { background-color: #eef5e8; }
-
-        .media-block { text-align: center; margin: 25px 0; }
-        iframe { border: 2px solid #4c7a34; border-radius: 8px; }
-
-        .gallery-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        figure { background-color: #ffffff; padding: 10px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        figcaption { text-align: center; margin-top: 8px; font-style: italic; color: #4c7a34; }
-
-        footer {
-            background-color: #355d24;
-            color: #e6f2dc;
-            text-align: center;
-            padding: 18px;
-            font-size: 14px;
-        }
-    </style>
+    <title>Bloom & Petal Haven | Flower Shop</title>
 </head>
 <body>
 
     <header>
-        <div class="shop-title">🌸 Bloom &amp; Petal Haven 🌸</div>
-        <div class="tagline">Bring nature indoors &amp; out</div>
+        <h1>🌸 Bloom &amp; Petal Haven 🌸</h1>
+        <p><em>Bring nature indoors &amp; out</em></p>
     </header>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#products">Products</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
+        <a href="#home">Home</a> |
+        <a href="#about">About</a> |
+        <a href="#products">Products</a> |
+        <a href="#gallery">Gallery</a> |
+        <a href="#contact">Contact</a> |
         <a href="https://www.unsplash.com" target="_blank">Flower Inspiration ↗</a>
     </nav>
+
+    <hr>
 
     <!-- ============ HOME ============ -->
     <section id="home">
         <h1>Welcome to Bloom &amp; Petal Haven</h1>
         <p>
-            Welcome to Bloom &amp; Petal Haven, Nairobi's most beloved online flower and plant shop, where nature meets your doorstep. <br>
-            Whether you are looking to brighten up your living room with a bouquet of fresh roses, transform your balcony into a lush green escape, or fill your office with the calming scent of lavender, we have everything you need to bring beauty into every corner of your life. <br>
-            Our flowers are handpicked daily to ensure maximum freshness, and our indoor plants are carefully selected to thrive in Nairobi's unique climate. <br>
+            Welcome to Bloom &amp; Petal Haven, Nairobi's most beloved online flower and plant shop, where nature meets your doorstep.<br>
+            Whether you are looking to brighten up your living room with a bouquet of fresh roses, transform your balcony into a lush green escape,
+            or fill your office with the calming scent of lavender, we have everything you need to bring beauty into every corner of your life.<br>
+            Our flowers are handpicked daily to ensure maximum freshness, and our indoor plants are carefully selected to thrive in Nairobi's unique climate.<br>
             From seed to delivery, Bloom &amp; Petal Haven is your trusted partner in growing, gifting, and celebrating life through flowers.
         </p>
 
         <hr>
 
         <h2>Our Flowers</h2>
-        <div class="image-row">
-            <a href="#products">
-                <img class="clickable-img"
-                     src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400"
-                     alt="Outdoor garden flowers in bloom. click to view our products"
-                     width="400" height="280">
-            </a>
-            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400"
-                 alt="Indoor potted plants and flowers for the home"
+        <a href="#products">
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400"
+                 alt="Outdoor garden flowers in bloom - click to view our products"
                  width="400" height="280">
-        </div>
-        <p style="text-align:center; font-size:14px;">(Tip: click the left image to jump to our products!)</p>
+        </a>
+        <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400"
+             alt="Indoor potted plants and flowers for the home"
+             width="400" height="280">
+        <p><em>(Tip: click the left image to jump to our products!)</em></p>
 
         <hr>
 
@@ -159,11 +70,15 @@
         <hr>
 
         <h2>Featured Bouquets &amp; Prices</h2>
-        <table>
-            <caption>Popular Bouquets at Bloom &amp; Petal Haven (Prices in KES)</caption>
+        <table border="1">
+            <caption><strong>Popular Bouquets at Bloom &amp; Petal Haven (Prices in KES)</strong></caption>
             <thead>
                 <tr>
-                    <th>Bouquet</th><th>Main Flower</th><th>Occasion</th><th>Price (KES)</th><th>Delivery</th>
+                    <th>Bouquet</th>
+                    <th>Main Flower</th>
+                    <th>Occasion</th>
+                    <th>Price (KES)</th>
+                    <th>Delivery</th>
                 </tr>
             </thead>
             <tbody>
@@ -178,31 +93,30 @@
         <hr>
 
         <h2>Listen: A Word From Our Garden</h2>
-        <div class="media-block">
-            <p><strong>Audio: Welcome message from Bloom &amp; Petal Haven</strong></p>
-            <audio controls title="Welcome message from Bloom and Petal Haven">
-                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
-                Your browser does not support the audio element.
-            </audio>
-        </div>
+        <p><strong>Audio: Welcome message from Bloom &amp; Petal Haven</strong></p>
+        <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
 
         <h2>Watch: Caring For Your Plants</h2>
-        <div class="media-block">
-            <p><strong>Video: A short guide to keeping your flowers fresh</strong></p>
-            <video width="560" controls title="Plant care guide video">
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4>
-                Your browser does not support the video tag.
-            </video>
-        </div>
+        <p><strong>Video: A short guide to keeping your flowers fresh</strong></p>
+        <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/KDhX9c5QfJc"
+            title="Caring For Your Plants"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
     </section>
+
+    <hr>
 
     <!-- ============ ABOUT ============ -->
     <section id="about">
         <h1>About Us</h1>
-        <div class="image-row">
-            <img src="https://images.unsplash.com/photo-1558603668-6570496b66f8?w=400"
-                 alt="Our florist arranging a fresh bouquet" width="400" height="280">
-        </div>
+        <img src="https://images.unsplash.com/photo-1558603668-6570496b66f8?w=400"
+             alt="Our florist arranging a fresh bouquet" width="400" height="280">
         <p>
             Founded in the heart of Nairobi, Bloom &amp; Petal Haven began with a simple belief:
             that everyone deserves a little piece of nature in their daily lives. What started as a
@@ -236,38 +150,40 @@
         <hr>
 
         <h2>Find Us in Nairobi</h2>
-        <div class="media-block">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35096055823!2d36.70730744863281!3d-1.3032035000000113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e0!3m2!1sen!2ske!4v1700000000000"
-                width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                title="Map showing Bloom and Petal Haven location in Nairobi"></iframe>
-        </div>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35096055823!2d36.70730744863281!3d-1.3032035000000113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e0!3m2!1sen!2ske!4v1700000000000"
+            width="600" height="400" allowfullscreen="" loading="lazy"
+            title="Map showing Bloom and Petal Haven location in Nairobi"></iframe>
     </section>
+
+    <hr>
 
     <!-- ============ PRODUCTS ============ -->
     <section id="products">
         <h1>Our Products</h1>
-        <p>
-            Explore our wide range of fresh flowers, indoor plants, and outdoor greenery.
-            Every item is carefully selected to bring lasting beauty to your space.
-        </p>
+        <p>Explore our wide range of fresh flowers, indoor plants, and outdoor greenery.
+           Every item is carefully selected to bring lasting beauty to your space.</p>
 
-        <div class="image-row">
-            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=300"
-                 alt="Bouquet of fresh roses" width="300" height="220">
-            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=300"
-                 alt="Potted succulent plants" width="300" height="220">
-            <img src="https://images.unsplash.com/photo-1462530260150-162092dbf011?w=300"
-                 alt="Sunflowers in a vase" width="300" height="220">
-        </div>
+        <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=300"
+             alt="Bouquet of fresh roses" width="300" height="220">
+        <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=300"
+             alt="Potted succulent plants" width="300" height="220">
+        <img src="https://images.unsplash.com/photo-1462530260150-162092dbf011?w=300"
+             alt="Sunflowers in a vase" width="300" height="220">
 
         <hr>
 
         <h2>Product Catalogue</h2>
-        <table>
-            <caption>Full Product Catalogue with Prices (KES)</caption>
+        <table border="1">
+            <caption><strong>Full Product Catalogue with Prices (KES)</strong></caption>
             <thead>
-                <tr><th>Product</th><th>Category</th><th>Care Level</th><th>Price (KES)</th><th>Availability</th></tr>
+                <tr>
+                    <th>Product</th>
+                    <th>Category</th>
+                    <th>Care Level</th>
+                    <th>Price (KES)</th>
+                    <th>Availability</th>
+                </tr>
             </thead>
             <tbody>
                 <tr><td>Red Roses (Dozen)</td><td>Fresh Flowers</td><td>Easy</td><td>2,000</td><td>In Stock</td></tr>
@@ -299,76 +215,98 @@
         </ol>
     </section>
 
+    <hr>
+
     <!-- ============ GALLERY ============ -->
     <section id="gallery">
         <h1>Our Gallery</h1>
-        <p style="text-align:center;">A showcase of our beautiful flowers, plants, and arrangements.</p>
+        <p>A showcase of our beautiful flowers, plants, and arrangements.</p>
 
         <hr>
 
         <h2>Photo Gallery</h2>
-        <div class="gallery-grid">
-            <figure>
-                <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=300" alt="Fresh red and pink roses" width="300" height="220">
-                <figcaption>Fresh Roses</figcaption>
-            </figure>
-            <figure>
-                <img src="https://images.unsplash.com/photo-1462530260150-162092dbf011?w=300" alt="Bright yellow sunflowers" width="300" height="220">
-                <figcaption>Cheerful Sunflowers</figcaption>
-            </figure>
-            <figure>
-                <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=300" alt="Green succulent plants in pots" width="300" height="220">
-                <figcaption>Easy-Care Succulents</figcaption>
-            </figure>
-            <figure>
-                <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300" alt="Indoor potted plants on a shelf" width="300" height="220">
-                <figcaption>Indoor Greenery</figcaption>
-            </figure>
-            <figure>
-                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300" alt="Outdoor garden in full bloom" width="300" height="220">
-                <figcaption>Garden in Bloom</figcaption>
-            </figure>
-            <figure>
-                <img src="https://images.unsplash.com/photo-1487070183336-b863922373d4?w=300" alt="Purple orchid flowers" width="300" height="220">
-                <figcaption>Elegant Orchids</figcaption>
-            </figure>
-            <figure>
-                <img src="https://images.unsplash.com/photo-1558603668-6570496b66f8?w=300" alt="Florist arranging a colourful bouquet" width="300" height="220">
-                <figcaption>Custom Arrangements</figcaption>
-            </figure>
-            <figure>
-                <img src="https://images.unsplash.com/photo-1502780402662-acc01917738e?w=300" alt="Lavender flowers in a field" width="300" height="220">
-                <figcaption>Fragrant Lavender</figcaption>
-            </figure>
-        </div>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=300"
+                 alt="Fresh red and pink roses" width="300" height="220">
+            <figcaption><em>Fresh Roses</em></figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1462530260150-162092dbf011?w=300"
+                 alt="Bright yellow sunflowers" width="300" height="220">
+            <figcaption><em>Cheerful Sunflowers</em></figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=300"
+                 alt="Green succulent plants in pots" width="300" height="220">
+            <figcaption><em>Easy-Care Succulents</em></figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300"
+                 alt="Indoor potted plants on a shelf" width="300" height="220">
+            <figcaption><em>Indoor Greenery</em></figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300"
+                 alt="Outdoor garden in full bloom" width="300" height="220">
+            <figcaption><em>Garden in Bloom</em></figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1487070183336-b863922373d4?w=300"
+                 alt="Purple orchid flowers" width="300" height="220">
+            <figcaption><em>Elegant Orchids</em></figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1558603668-6570496b66f8?w=300"
+                 alt="Florist arranging a colourful bouquet" width="300" height="220">
+            <figcaption><em>Custom Arrangements</em></figcaption>
+        </figure>
+
+        <figure>
+            <img src="https://images.unsplash.com/photo-1502780402662-acc01917738e?w=300"
+                 alt="Lavender flowers in a field" width="300" height="220">
+            <figcaption><em>Fragrant Lavender</em></figcaption>
+        </figure>
 
         <hr>
 
         <h2>Featured Video</h2>
-        <div class="media-block">
-            <p><strong>Behind the scenes: arranging a fresh bouquet</strong></p>
-            <video width="560" controls title="Behind the scenes bouquet arrangement video">
-                <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
+        <p><strong>Behind the scenes: arranging a fresh bouquet</strong></p>
+        <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/KDhX9c5QfJc"
+            title="Featured Bouquet Arrangement Video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
     </section>
+
+    <hr>
 
     <!-- ============ CONTACT ============ -->
     <section id="contact">
         <h1>Contact Us</h1>
-        <p>
-            We'd love to hear from you! Reach out for orders, enquiries, or plant care advice.
-            Our friendly team is always happy to help bring a little nature into your life.
-        </p>
+        <p>We'd love to hear from you! Reach out for orders, enquiries, or plant care advice.
+           Our friendly team is always happy to help bring a little nature into your life.</p>
 
         <hr>
 
         <h2>Get In Touch</h2>
-        <table>
-            <caption>Bloom &amp; Petal Haven Contact Details</caption>
+        <table border="1">
+            <caption><strong>Bloom &amp; Petal Haven Contact Details</strong></caption>
             <thead>
-                <tr><th>Department</th><th>Contact Person</th><th>Phone</th><th>Email</th></tr>
+                <tr>
+                    <th>Department</th>
+                    <th>Contact Person</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                </tr>
             </thead>
             <tbody>
                 <tr><td>Orders</td><td>Amina</td><td>0712 345 678</td><td>orders@bloompetal.co.ke</td></tr>
@@ -392,13 +330,13 @@
         <hr>
 
         <h2>Visit Our Shop</h2>
-        <div class="media-block">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35096055823!2d36.70730744863281!3d-1.3032035000000113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e0!3m2!1sen!2ske!4v1700000000000"
-                width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"
-                title="Map showing our shop location in Nairobi"></iframe>
-        </div>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35096055823!2d36.70730744863281!3d-1.3032035000000113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e0!3m2!1sen!2ske!4v1700000000000"
+            width="600" height="400" allowfullscreen="" loading="lazy"
+            title="Map showing our shop location in Nairobi"></iframe>
     </section>
+
+    <hr>
 
     <footer>
         <p>&copy; 2026 Bloom &amp; Petal Haven, Nairobi, Kenya. All rights reserved.</p>
