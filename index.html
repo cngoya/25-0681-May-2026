@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloom &amp; Petal Haven | Flower Shop</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <h1>🌸 Bloom &amp; Petal Haven 🌸</h1>
+        <p><em>Bring nature indoors &amp; out</em></p>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+        <button onclick="openModal('signup-modal')">🌷 Sign Up</button>
+        <button onclick="openModal('promo-modal')">🎁 View Promos</button>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════
+         WELCOME POP-UP MODAL
+         ═══════════════════════════════════════════ -->
+    <div class="modal-overlay" id="welcome-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('welcome-modal')">×</button>
+            <h2>🌸 Welcome to Bloom &amp; Petal Haven! 🌸</h2>
+            <p>Karibu! We're delighted to have you visit our online flower shop.</p>
+            <p>Browse our beautiful collection of fresh flowers, indoor plants, and outdoor greenery.
+               Enjoy <strong>same-day delivery</strong> across Nairobi!</p>
+            <p style="text-align:center;">
+                <button class="modal-close" onclick="closeModal('welcome-modal')"
+                        style="position:relative; top:auto; right:auto; width:auto; height:auto; padding:12px 30px; border-radius:25px; margin-top:10px;">
+                    Start Shopping 🛒
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         PROMO / DISCOUNT POP-UP MODAL
+         ═══════════════════════════════════════════ -->
+    <div class="modal-overlay" id="promo-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('promo-modal')">×</button>
+            <h2>🎁 Special Offers Just for You!</h2>
+            <p>Limited-time discounts on our most-loved products:</p>
+
+            <div class="promo-deals">
+                <h3>🌺 This Week's Deals</h3>
+                <ul>
+                    <li>Rose Romance Bouquet — <span class="discount">20% OFF</span> (Now KES 2,000)</li>
+                    <li>Sunshine Mix Sunflowers — <span class="discount">15% OFF</span> (Now KES 1,530)</li>
+                    <li>Peace Lily Indoor Plant — <span class="discount">25% OFF</span> (Now KES 1,050)</li>
+                    <li>Orchid Plant — <span class="discount">10% OFF</span> (Now KES 2,520)</li>
+                    <li>Free Delivery on orders above <strong>KES 3,000</strong></li>
+                </ul>
+            </div>
+
+            <p style="margin-top:15px; text-align:center; font-style:italic; color:#c2185b;">
+                Use code <strong>BLOOM20</strong> at checkout!
+            </p>
+
+            <p style="text-align:center;">
+                <button onclick="closeModal('promo-modal'); openModal('signup-modal')"
+                        style="background: linear-gradient(135deg, #2e7d32, #66bb6a); color:white; border:none; padding:12px 30px; border-radius:25px; cursor:pointer; font-size:1em; font-weight:bold; box-shadow:0 4px 12px rgba(46,125,50,0.4);">
+                    Sign Up to Claim 🌟
+                </button>
+            </p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         SIGN UP / ACCOUNT CREATION MODAL
+         ═══════════════════════════════════════════ -->
+    <div class="modal-overlay" id="signup-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('signup-modal')">×</button>
+            <h2>🌷 Create Your Account</h2>
+            <p>Join the Bloom &amp; Petal family and unlock exclusive offers!</p>
+
+            <form class="signup-form" id="signup-form" novalidate>
+                <div class="form-group">
+                    <label for="signup-name">Full Name *</label>
+                    <input type="text" id="signup-name" placeholder="e.g. Cleon Mwangi">
+                    <span class="error-msg" id="signup-name-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-email">Email Address *</label>
+                    <input type="email" id="signup-email" placeholder="e.g. cleon@gmail.com">
+                    <span class="error-msg" id="signup-email-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-phone">Phone Number *</label>
+                    <input type="tel" id="signup-phone" placeholder="e.g. 0712345678">
+                    <span class="error-msg" id="signup-phone-error"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="signup-gender">Gender *</label>
+                    <select id="signup-gender">
+                        <option value="">-- Select Gender --</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not">Prefer not to say</option>
+                    </select>
+                    <span class="error-msg" id="signup-gender-error"></span>
+                </div>
+
+                <button type="submit">Create Account 🌸</button>
+
+                <div class="success-msg" id="signup-success"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- HOME -->
+    <section id="home">
+        <h1>Welcome to Bloom &amp; Petal Haven</h1>
+        <p>
+           Welcome to Bloom &amp; Petal Haven, Nairobi's favorite online flower and plant shop.
+           We deliver fresh, handpicked daily bouquets and climate-ready indoor plants straight to your doorstep,
+           making it easy to brighten your home, balcony, or office.
+           From everyday spaces to special celebrations, we are your trusted partner in growing, gifting, and
+           bringing nature's beauty into your life.
+        </p>
+
+        <hr>
+
+        <h2>Our Flowers</h2>
+        <div class="image-grid">
+            <a href="#products">
+                <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400"
+                     alt="Outdoor garden flowers in bloom">
+            </a>
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400" alt="Indoor potted plants">
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400" alt="Fresh roses">
+            <img src="https://images.unsplash.com/photo-1462530260150-162092dbf011?w=400" alt="Sunflowers">
+        </div>
+
+        <hr>
+
+        <h2>Why Shop With Us</h2>
+        <ul class="bloom-list">
+            <li data-flower="🌸">Fresh, handpicked flowers delivered daily</li>
+            <li data-flower="🌿">Wide selection of indoor and outdoor plants</li>
+            <li data-flower="🌻">Same-day delivery across Nairobi</li>
+            <li data-flower="🌷">Expert advice on plant care and styling</li>
+            <li data-flower="🌹">Affordable prices for every budget</li>
+        </ul>
+
+        <h2>How to Order</h2>
+        <ol class="garden-path">
+            <li>Browse our collection of flowers and plants</li>
+            <li>Add your favourite items to the cart</li>
+            <li>Enter your delivery details</li>
+            <li>Choose a convenient delivery time</li>
+            <li>Confirm your order and pay securely</li>
+        </ol>
+
+        <hr>
+
+        <h2>Featured Bouquets &amp; Prices</h2>
+        <table>
+            <caption>Popular Bouquets at Bloom &amp; Petal Haven (Prices in KES)</caption>
+            <thead>
+                <tr><th>Bouquet</th><th>Main Flower</th><th>Occasion</th><th>Price (KES)</th><th>Delivery</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Rose Romance</td><td>Red Roses</td><td>Anniversary</td><td>2,500</td><td>Same Day</td></tr>
+                <tr><td>Sunshine Mix</td><td>Sunflowers</td><td>Birthday</td><td>1,800</td><td>Same Day</td></tr>
+                <tr><td>Lavender Calm</td><td>Lavender</td><td>Get Well</td><td>1,500</td><td>Next Day</td></tr>
+                <tr><td>Tropical Bliss</td><td>Orchids</td><td>Congratulations</td><td>3,200</td><td>Same Day</td></tr>
+                <tr><td>Garden Fresh</td><td>Mixed Seasonal</td><td>Just Because</td><td>1,200</td><td>Next Day</td></tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>Listen &amp; Watch</h2>
+        <div class="media-grid">
+            <div class="media-card">
+                <strong>🎵 A Word From Our Garden</strong>
+                <audio controls>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
+                </audio>
+            </div>
+            <div class="media-card">
+                <strong>🎬 Caring For Your Plants</strong>
+                <iframe src="https://www.youtube.com/embed/KDhX9c5QfJc" title="Caring For Your Plants" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <h1>About Us</h1>
+        <img class="about-image" src="https://images.unsplash.com/photo-1558603668-6570496b66f8?w=400" alt="Our florist">
+        <p>Founded in the heart of Nairobi, Bloom &amp; Petal Haven began with a simple belief: that everyone deserves a little piece of nature in their daily lives.</p>
+        <p>Our team of passionate florists hand-select every stem and leaf, ensuring that what arrives at your door is nothing short of perfect.</p>
+
+        <hr>
+
+        <h2>What We Offer</h2>
+        <ul>
+            <li>Fresh Flowers <ul><li>Roses</li><li>Sunflowers</li><li>Orchids</li></ul></li>
+            <li>Indoor Plants <ul><li>Succulents</li><li>Ferns</li><li>Peace Lilies</li></ul></li>
+            <li>Outdoor Plants <ul><li>Shrubs</li><li>Climbers</li><li>Flowering Trees</li></ul></li>
+            <li>Accessories <ul><li>Pots &amp; Planters</li><li>Fertilizers</li><li>Gift Wrapping</li></ul></li>
+        </ul>
+
+        <hr>
+
+        <h2>Find Us in Nairobi</h2>
+        <div class="map-wrap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35096055823!2d36.70730744863281!3d-1.3032035000000113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e0!3m2!1sen!2ske!4v1700000000000"
+                allowfullscreen="" loading="lazy" title="Map"></iframe>
+        </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section id="products">
+        <h1>Our Products</h1>
+        <p>Explore our wide range of fresh flowers, indoor plants, and outdoor greenery.</p>
+
+        <div class="image-grid image-grid-3">
+            <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=300" alt="Roses">
+            <img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=300" alt="Succulents">
+            <img src="https://images.unsplash.com/photo-1462530260150-162092dbf011?w=300" alt="Sunflowers">
+            <img src="https://images.unsplash.com/photo-1487070183336-b863922373d4?w=300" alt="Orchid">
+            <img src="https://images.unsplash.com/photo-1502780402662-acc01917738e?w=300" alt="Lavender">
+            <img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300" alt="Indoor plants">
+        </div>
+
+        <hr>
+
+        <h2>Product Catalogue</h2>
+        <table>
+            <caption>Full Product Catalogue with Prices (KES)</caption>
+            <thead>
+                <tr><th>Product</th><th>Category</th><th>Care Level</th><th>Price (KES)</th><th>Availability</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Red Roses (Dozen)</td><td>Fresh Flowers</td><td>Easy</td><td>2,000</td><td>In Stock</td></tr>
+                <tr><td>Peace Lily</td><td>Indoor Plant</td><td>Easy</td><td>1,400</td><td>In Stock</td></tr>
+                <tr><td>Aloe Vera Succulent</td><td>Indoor Plant</td><td>Very Easy</td><td>800</td><td>In Stock</td></tr>
+                <tr><td>Bougainvillea</td><td>Outdoor Plant</td><td>Moderate</td><td>1,900</td><td>Limited</td></tr>
+                <tr><td>Orchid Plant</td><td>Indoor Plant</td><td>Moderate</td><td>2,800</td><td>In Stock</td></tr>
+                <tr><td>Lavender Pot</td><td>Herb / Flower</td><td>Easy</td><td>1,300</td><td>In Stock</td></tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>Best Sellers</h2>
+        <ul>
+            <li>Rose Romance Bouquet</li>
+            <li>Peace Lily Indoor Plant</li>
+            <li>Tropical Orchid Arrangement</li>
+            <li>Succulent Starter Set</li>
+        </ul>
+
+        <h2>Plant Care Steps</h2>
+        <ol class="garden-path">
+            <li>Place the plant in appropriate lighting</li>
+            <li>Water according to its care level</li>
+            <li>Feed with fertilizer monthly</li>
+            <li>Prune dead leaves regularly</li>
+            <li>Repot as the plant grows</li>
+        </ol>
+    </section>
+
+    <!-- GALLERY -->
+    <section id="gallery">
+        <h1>Our Gallery</h1>
+        <p>A showcase of our beautiful flowers, plants, and arrangements.</p>
+        <hr>
+
+        <h2>Photo Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=220" alt="Roses"><em>Fresh Roses</em></div>
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1462530260150-162092dbf011?w=220" alt="Sunflowers"><em>Cheerful Sunflowers</em></div>
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=220" alt="Succulents"><em>Easy-Care Succulents</em></div>
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=220" alt="Indoor"><em>Indoor Greenery</em></div>
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=220" alt="Garden"><em>Garden in Bloom</em></div>
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1487070183336-b863922373d4?w=220" alt="Orchids"><em>Elegant Orchids</em></div>
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1558603668-6570496b66f8?w=220" alt="Arrangements"><em>Custom Arrangements</em></div>
+            <div class="gallery-card"><img src="https://images.unsplash.com/photo-1502780402662-acc01917738e?w=220" alt="Lavender"><em>Fragrant Lavender</em></div>
+        </div>
+        <hr>
+
+        <h2>Featured Videos</h2>
+        <div class="media-grid">
+            <div class="media-card">
+                <strong>🎬 Bouquet Arrangement</strong>
+                <iframe src="https://www.youtube.com/embed/KDhX9c5QfJc" title="Bouquet" allowfullscreen></iframe>
+            </div>
+            <div class="media-card">
+                <strong>🎬 Plant Care Guide</strong>
+                <iframe src="https://www.youtube.com/embed/hbJoajsYsAw" title="Plant Care" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you! Reach out for orders, enquiries, or plant care advice.</p>
+
+        <hr>
+
+        <h2>Get In Touch</h2>
+        <table>
+            <caption>Bloom &amp; Petal Haven Contact Details</caption>
+            <thead>
+                <tr><th>Department</th><th>Contact Person</th><th>Phone</th><th>Email</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Orders</td><td>Amina</td><td>0712 345 678</td><td>orders@bloompetal.co.ke</td></tr>
+                <tr><td>Customer Care</td><td>David</td><td>0723 456 789</td><td>care@bloompetal.co.ke</td></tr>
+                <tr><td>Deliveries</td><td>Grace</td><td>0734 567 890</td><td>delivery@bloompetal.co.ke</td></tr>
+                <tr><td>Plant Care Advice</td><td>Michael</td><td>0745 678 901</td><td>care.advice@bloompetal.co.ke</td></tr>
+                <tr><td>General Enquiries</td><td>Front Desk</td><td>0756 789 012</td><td>info@bloompetal.co.ke</td></tr>
+            </tbody>
+        </table>
+
+        <hr>
+
+        <h2>Opening Hours</h2>
+        <ul class="bloom-list">
+            <li data-flower="🌅">Monday – Friday: 8:00 AM – 7:00 PM</li>
+            <li data-flower="🌼">Saturday: 9:00 AM – 6:00 PM</li>
+            <li data-flower="🌞">Sunday: 10:00 AM – 4:00 PM</li>
+            <li data-flower="🎉">Public Holidays: 10:00 AM – 2:00 PM</li>
+        </ul>
+
+        <hr>
+
+        <h2>Visit Our Shop</h2>
+        <div class="map-wrap">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d255282.35096055823!2d36.70730744863281!3d-1.3032035000000113!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi!5e0!3m2!1sen!2ske!4v1700000000000"
+                allowfullscreen="" loading="lazy" title="Map"></iframe>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Bloom &amp; Petal Haven, Nairobi, Kenya. All rights reserved.</p>
+    </footer>
+
+    <!-- External JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
