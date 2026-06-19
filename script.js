@@ -11,6 +11,51 @@ function closeModal(id) {
     document.getElementById(id).classList.remove('active');
 }
 
+// ─── Promo chime (gentle two-note sound, generated in-browser) ───
+function playPromoSound() {
+    try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        const ctx = new AudioCtx();
+
+        // Browsers suspend audio until a user gesture; try to resume.
+        if (ctx.state === 'suspended') ctx.resume();
+
+        // Two soft notes: a pleasant "ding-dong" chime.
+        const notes = [
+            { freq: 880, start: 0,    duration: 0.18 }, // A5
+            { freq: 1175, start: 0.16, duration: 0.30 } // D6
+        ];
+
+        notes.forEach(function(note) {
+            const osc  = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = note.freq;
+
+            const t = ctx.currentTime + note.start;
+            // Quick fade-in then gentle fade-out so it doesn't click.
+            gain.gain.setValueAtTime(0.0001, t);
+            gain.gain.exponentialRampToValueAtTime(0.25, t + 0.02);
+            gain.gain.exponentialRampToValueAtTime(0.0001, t + note.duration);
+
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(t);
+            osc.stop(t + note.duration + 0.02);
+        });
+    } catch (err) {
+        // Audio not supported / blocked — fail silently, popup still shows.
+        console.warn('Promo sound could not play:', err);
+    }
+}
+
+// ─── Show the promo popup with a chime ───
+function showPromo() {
+    openModal('promo-modal');
+    playPromoSound();
+}
+
 // ─── Welcome popup (auto-shows on page load) ───
 window.addEventListener('load', function() {
     // Show welcome popup after 1.5 seconds
@@ -22,11 +67,11 @@ window.addEventListener('load', function() {
     setTimeout(function() {
         // Only show if welcome is already closed
         if (!document.getElementById('welcome-modal').classList.contains('active')) {
-            openModal('promo-modal');
+            showPromo();
         } else {
             // Wait for welcome to close, then show promo
             setTimeout(function() {
-                openModal('promo-modal');
+                showPromo();
             }, 3000);
         }
     }, 8000);
