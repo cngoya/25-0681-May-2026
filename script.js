@@ -1,8 +1,6 @@
-/* ═══════════════════════════════════════════
-   BLOOM & PETAL HAVEN — JavaScript
-   ═══════════════════════════════════════════ */
 
-// ─── Helper: Show / hide modals ───
+
+// ─── Show / hide modals ───
 function openModal(id) {
     document.getElementById(id).classList.add('active');
 }
