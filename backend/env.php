@@ -10,6 +10,7 @@
  * Keep secrets in .env — it is gitignored and never committed.
  */
 
+if (!function_exists('load_env')):
 function load_env(string $path): void
 {
     if (!is_readable($path)) {
@@ -43,5 +44,6 @@ function load_env(string $path): void
         $_SERVER[$key] = $value;
     }
 }
+endif;
 
 load_env(__DIR__ . '/.env');

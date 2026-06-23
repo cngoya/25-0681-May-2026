@@ -1,0 +1,136 @@
+/* ═══════════════════════════════════════════
+   BLOOM & PETAL — Admin dashboard styles
+   ═══════════════════════════════════════════ */
+
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #fdf2f7;
+    color: #333;
+}
+
+/* ─── Header & nav ─── */
+.admin-header {
+    display: flex; align-items: center; justify-content: space-between;
+    background: linear-gradient(135deg, #ad1457, #c2185b);
+    color: #fff; padding: 16px 28px;
+}
+.admin-header h1 { margin: 0; font-size: 1.4em; }
+.admin-header .logout { color: #fff; text-decoration: none; font-weight: bold; opacity: 0.9; }
+.admin-header .logout:hover { opacity: 1; text-decoration: underline; }
+
+.admin-nav {
+    display: flex; flex-wrap: wrap; gap: 4px;
+    background: #fff; padding: 0 20px;
+    border-bottom: 2px solid #f0d6e0;
+}
+.admin-nav a {
+    padding: 14px 18px; text-decoration: none; color: #880e4f;
+    font-weight: 600; border-bottom: 3px solid transparent;
+}
+.admin-nav a:hover { background: #fdf2f7; }
+.admin-nav a.active { border-bottom-color: #c2185b; color: #c2185b; }
+
+.admin-main { max-width: 1000px; margin: 0 auto; padding: 26px 20px 60px; }
+.admin-main h2 { color: #ad1457; margin-top: 0; }
+.admin-main h3 { color: #880e4f; margin-top: 30px; }
+.count { color: #777; font-style: italic; }
+.empty { color: #999; padding: 20px 0; }
+
+/* ─── Stat cards ─── */
+.stat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px; margin: 20px 0;
+}
+.stat-card {
+    background: #fff; border-radius: 14px; padding: 20px;
+    box-shadow: 0 3px 12px rgba(194,24,91,0.1);
+    display: flex; flex-direction: column; gap: 6px;
+}
+.stat-num { font-size: 1.8em; font-weight: bold; color: #c2185b; }
+.stat-label { color: #888; font-size: 0.9em; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-warn .stat-num { color: #ef6c00; }
+.stat-money .stat-num { color: #2e7d32; font-size: 1.4em; }
+
+/* ─── Tables ─── */
+.admin-table {
+    width: 100%; border-collapse: collapse; background: #fff;
+    border-radius: 12px; overflow: hidden; margin: 14px 0;
+    box-shadow: 0 3px 12px rgba(194,24,91,0.08);
+}
+.admin-table th, .admin-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #f3e2ea; }
+.admin-table th { background: #fce4ec; color: #880e4f; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.4px; }
+.admin-table tr:last-child td { border-bottom: none; }
+.admin-table tr:hover td { background: #fdf6f9; }
+.admin-table.compact th, .admin-table.compact td { padding: 8px 12px; font-size: 0.9em; }
+
+/* ─── Badges ─── */
+.badge {
+    display: inline-block; padding: 3px 10px; border-radius: 12px;
+    font-size: 0.8em; font-weight: bold; background: #eee; color: #555;
+    text-transform: capitalize;
+}
+.badge-pending   { background: #fff3e0; color: #ef6c00; }
+.badge-confirmed { background: #e3f2fd; color: #1565c0; }
+.badge-delivered { background: #e8f5e9; color: #2e7d32; }
+.badge-cancelled { background: #ffebee; color: #c62828; }
+.badge-in_stock  { background: #e8f5e9; color: #2e7d32; }
+.badge-limited   { background: #fff3e0; color: #ef6c00; }
+.badge-out_of_stock { background: #ffebee; color: #c62828; }
+
+/* ─── Order cards ─── */
+.order-card {
+    background: #fff; border-radius: 14px; padding: 18px 20px; margin: 16px 0;
+    box-shadow: 0 3px 12px rgba(194,24,91,0.1);
+}
+.order-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.order-total { font-size: 1.2em; font-weight: bold; color: #2e7d32; }
+.order-meta { display: flex; flex-wrap: wrap; gap: 14px; color: #666; font-size: 0.88em; margin: 10px 0; }
+.order-summary { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 8px; color: #555; font-size: 0.9em; }
+.order-summary .grand { font-weight: bold; color: #c2185b; }
+
+.status-form { margin-top: 12px; display: flex; align-items: center; gap: 8px; }
+.status-form select { padding: 7px 10px; border: 2px solid #f0d6e0; border-radius: 8px; }
+.status-form button, .login-box button {
+    background: linear-gradient(135deg, #2e7d32, #66bb6a); color: #fff;
+    border: none; padding: 8px 18px; border-radius: 18px; cursor: pointer; font-weight: bold;
+}
+.status-form button:hover { filter: brightness(1.05); }
+
+/* ─── Messages ─── */
+.message-card {
+    background: #fff; border-radius: 12px; padding: 16px 18px; margin: 14px 0;
+    box-shadow: 0 3px 12px rgba(194,24,91,0.08);
+}
+.message-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.message-date { margin-left: auto; color: #999; font-size: 0.85em; }
+.message-meta { color: #777; font-size: 0.88em; margin: 6px 0; }
+.message-body { margin: 8px 0 0; }
+
+/* ─── Notices & links ─── */
+.notice { background: #e8f5e9; color: #2e7d32; padding: 12px 16px; border-radius: 10px; margin-bottom: 16px; font-weight: 600; }
+.btn-link { color: #c2185b; font-weight: bold; text-decoration: none; }
+.btn-link:hover { text-decoration: underline; }
+
+/* ─── Login page ─── */
+.login-body {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8bbd0, #ce93d8);
+}
+.login-box {
+    background: #fff; padding: 40px 34px; border-radius: 18px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2); text-align: center; width: 320px;
+}
+.login-box h1 { margin: 0 0 4px; color: #ad1457; }
+.login-box p { margin: 0 0 20px; color: #888; }
+.login-box input {
+    width: 100%; padding: 12px 14px; margin-bottom: 14px;
+    border: 2px solid #f0d6e0; border-radius: 10px; font-size: 1em;
+}
+.login-box button { width: 100%; padding: 12px; font-size: 1.05em; border-radius: 22px; }
+.login-error { background: #ffebee; color: #c62828; padding: 10px; border-radius: 8px; margin-bottom: 14px; font-size: 0.9em; }
+
+/* ─── Footer ─── */
+.admin-footer { text-align: center; color: #aaa; padding: 20px; font-size: 0.85em; }

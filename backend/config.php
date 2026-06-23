@@ -8,7 +8,7 @@
  * gitignored — never commit real credentials.
  */
 
-require __DIR__ . '/env.php';
+require_once __DIR__ . '/env.php';
 
 return [
     'host'    => getenv('DB_HOST') ?: '127.0.0.1',
