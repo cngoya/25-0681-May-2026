@@ -257,3 +257,242 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ═══════════════════════════════════════════
+//   SHOPPING CART & CHECKOUT
+// ═══════════════════════════════════════════
+
+var CART_KEY = 'bloom_cart';
+var DELIVERY_FEE = 300;            // mirrors backend/order.php (display only)
+var FREE_DELIVERY_THRESHOLD = 3000;
+
+// Load / save the cart (array of {id, name, price, qty}) from localStorage.
+function loadCart() {
+    try {
+        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateCartCount();
+}
+
+function cartItemCount() {
+    return loadCart().reduce(function(sum, item) { return sum + item.qty; }, 0);
+}
+
+function updateCartCount() {
+    var badge = document.getElementById('cart-count');
+    if (badge) badge.textContent = cartItemCount();
+}
+
+function formatKES(amount) {
+    return 'KES ' + Number(amount).toLocaleString('en-KE');
+}
+
+// Add a product to the cart (or bump its quantity).
+function addToCart(id, name, price) {
+    var cart = loadCart();
+    var existing = cart.find(function(item) { return item.id === id; });
+    if (existing) {
+        existing.qty += 1;
+    } else {
+        cart.push({ id: id, name: name, price: price, qty: 1 });
+    }
+    saveCart(cart);
+}
+
+function setQty(id, qty) {
+    var cart = loadCart();
+    var item = cart.find(function(i) { return i.id === id; });
+    if (!item) return;
+    item.qty = qty;
+    if (item.qty <= 0) {
+        cart = cart.filter(function(i) { return i.id !== id; });
+    }
+    saveCart(cart);
+    renderCart();
+}
+
+function removeFromCart(id) {
+    saveCart(loadCart().filter(function(i) { return i.id !== id; }));
+    renderCart();
+}
+
+// Build the cart modal contents and totals (display estimate; the server
+// recomputes the authoritative total on checkout).
+function renderCart() {
+    var cart = loadCart();
+    var itemsBox = document.getElementById('cart-items');
+    var emptyBox = document.getElementById('cart-empty');
+    var summary  = document.getElementById('cart-summary');
+
+    if (cart.length === 0) {
+        itemsBox.innerHTML = '';
+        emptyBox.style.display = 'block';
+        summary.style.display = 'none';
+        return;
+    }
+
+    emptyBox.style.display = 'none';
+    summary.style.display = 'block';
+
+    var html = '';
+    var subtotal = 0;
+    cart.forEach(function(item) {
+        var lineTotal = item.price * item.qty;
+        subtotal += lineTotal;
+        html +=
+            '<div class="cart-item">' +
+                '<div class="cart-item-info">' +
+                    '<strong>' + item.name + '</strong>' +
+                    '<span>' + formatKES(item.price) + ' each</span>' +
+                '</div>' +
+                '<div class="cart-item-qty">' +
+                    '<button onclick="setQty(' + item.id + ',' + (item.qty - 1) + ')">−</button>' +
+                    '<span>' + item.qty + '</span>' +
+                    '<button onclick="setQty(' + item.id + ',' + (item.qty + 1) + ')">+</button>' +
+                '</div>' +
+                '<div class="cart-item-total">' + formatKES(lineTotal) + '</div>' +
+                '<button class="cart-item-remove" onclick="removeFromCart(' + item.id + ')" title="Remove">🗑</button>' +
+            '</div>';
+    });
+    itemsBox.innerHTML = html;
+
+    var delivery = subtotal >= FREE_DELIVERY_THRESHOLD ? 0 : DELIVERY_FEE;
+    document.getElementById('cart-subtotal').textContent = formatKES(subtotal);
+    document.getElementById('cart-delivery').textContent = delivery === 0 ? 'FREE' : formatKES(delivery);
+    document.getElementById('cart-total').textContent = formatKES(subtotal + delivery);
+}
+
+function openCart() {
+    renderCart();
+    openModal('cart-modal');
+}
+
+// Move from cart → checkout.
+function goToCheckout() {
+    if (loadCart().length === 0) return;
+    closeModal('cart-modal');
+    openModal('checkout-modal');
+}
+
+// Wire up the "Add 🛒" buttons and the checkout form once the page loads.
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+
+    document.querySelectorAll('.add-cart').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var id = parseInt(btn.getAttribute('data-id'), 10);
+            var name = btn.getAttribute('data-name');
+            var price = parseFloat(btn.getAttribute('data-price'));
+            addToCart(id, name, price);
+
+            // Quick visual confirmation.
+            var original = btn.textContent;
+            btn.textContent = 'Added ✓';
+            btn.disabled = true;
+            setTimeout(function() {
+                btn.textContent = original;
+                btn.disabled = false;
+            }, 900);
+        });
+    });
+
+    var checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            var name    = document.getElementById('checkout-name').value.trim();
+            var email   = document.getElementById('checkout-email').value.trim();
+            var phone   = document.getElementById('checkout-phone').value.trim();
+            var address = document.getElementById('checkout-address').value.trim();
+            var time    = document.getElementById('checkout-time').value;
+            var promo   = document.getElementById('cart-promo-code').value.trim();
+
+            // Client-side checks (server validates again).
+            var valid = true;
+            if (!isValidName(name))   { showError('checkout-name', 'Please enter a valid name.'); valid = false; } else { clearError('checkout-name'); }
+            if (!isValidEmail(email)) { showError('checkout-email', 'Please enter a valid email.'); valid = false; } else { clearError('checkout-email'); }
+            if (!isValidPhone(phone)) { showError('checkout-phone', 'Please enter a valid phone number.'); valid = false; } else { clearError('checkout-phone'); }
+            if (address.length < 6)   { showError('checkout-address', 'Please enter your delivery address.'); valid = false; } else { clearError('checkout-address'); }
+            if (!valid) return;
+
+            var cart = loadCart();
+            if (cart.length === 0) return;
+
+            var orderError = document.getElementById('checkout-order-error');
+            orderError.style.display = 'none';
+
+            var submitBtn = checkoutForm.querySelector('button[type="submit"]');
+            var originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Placing order…';
+
+            fetch('backend/order.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    customer: { name: name, email: email, phone: phone, address: address, delivery_time: time },
+                    items: cart.map(function(i) { return { id: i.id, quantity: i.qty }; }),
+                    promo_code: promo
+                })
+            })
+            .then(function(response) {
+                return response.json().then(function(data) { return { status: response.status, data: data }; });
+            })
+            .then(function(result) {
+                var data = result.data;
+
+                if (result.status === 400 && data.errors) {
+                    Object.keys(data.errors).forEach(function(field) {
+                        if (field === 'promo_code' || field === 'items') {
+                            orderError.textContent = data.errors[field];
+                            orderError.style.display = 'block';
+                        } else {
+                            showError('checkout-' + field, data.errors[field]);
+                        }
+                    });
+                    return;
+                }
+
+                if (!data.ok) {
+                    orderError.textContent = data.message || 'Could not place order. Please try again.';
+                    orderError.style.display = 'block';
+                    return;
+                }
+
+                // Success — order saved. Show confirmation and clear the cart.
+                var successMsg = document.getElementById('checkout-success');
+                successMsg.innerHTML =
+                    '🌸 Thank you, <strong>' + name + '</strong>! Order <strong>#' + data.order_id + '</strong> placed.<br>' +
+                    'Total: <strong>' + formatKES(data.total) + '</strong>' +
+                    (data.discount > 0 ? ' (incl. ' + formatKES(data.discount) + ' discount)' : '') +
+                    '. We\'ll deliver to your address soon!';
+                successMsg.classList.add('show');
+
+                saveCart([]);
+                checkoutForm.reset();
+                document.getElementById('cart-promo-code').value = '';
+
+                setTimeout(function() {
+                    closeModal('checkout-modal');
+                    successMsg.classList.remove('show');
+                }, 5000);
+            })
+            .catch(function(err) {
+                console.error('Order request failed:', err);
+                orderError.textContent = 'Could not reach the server. Is the backend running?';
+                orderError.style.display = 'block';
+            })
+            .finally(function() {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            });
+        });
+    }
+});
