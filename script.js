@@ -197,21 +197,63 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearError('signup-gender');
             }
 
-            // If everything is valid, show success
-            if (valid) {
+            // If client-side checks fail, stop here.
+            if (!valid) {
+                return;
+            }
+
+            // Send to the PHP backend, which validates again and saves to MySQL.
+            const submitBtn = signupForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Creating…';
+
+            fetch('backend/signup.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: name, email: email, phone: phone, gender: gender })
+            })
+            .then(function(response) {
+                return response.json().then(function(data) {
+                    return { status: response.status, data: data };
+                });
+            })
+            .then(function(result) {
+                const data = result.data;
+
+                // Server-side validation errors → show them per field.
+                if (result.status === 400 && data.errors) {
+                    Object.keys(data.errors).forEach(function(field) {
+                        showError('signup-' + field, data.errors[field]);
+                    });
+                    return;
+                }
+
+                // Duplicate email or other handled error.
+                if (!data.ok) {
+                    showError('signup-email', data.message || 'Sign-up failed. Please try again.');
+                    return;
+                }
+
+                // Success — account saved in the database.
                 const successMsg = document.getElementById('signup-success');
                 successMsg.innerHTML = '🌸 Welcome <strong>' + name + '</strong>! Your account has been created successfully. Check ' + email + ' for confirmation.';
                 successMsg.classList.add('show');
-
-                // Reset form
                 signupForm.reset();
 
-                // Close modal after 3 seconds
                 setTimeout(function() {
                     closeModal('signup-modal');
                     successMsg.classList.remove('show');
                 }, 3000);
-            }
+            })
+            .catch(function(err) {
+                console.error('Sign-up request failed:', err);
+                showError('signup-email', 'Could not reach the server. Is the backend running?');
+            })
+            .finally(function() {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+            });
         });
     }
 });
