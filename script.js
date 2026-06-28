@@ -431,6 +431,39 @@ function renderCatalogue(products) {
 
     if (catBody && catRows) catBody.innerHTML = catRows;
     if (bqBody && bqRows) bqBody.innerHTML = bqRows;
+
+    renderProductCards(products);
+    renderBestSellers(products);
+}
+
+// Visual product cards (photo + price + buy) for every product with an image.
+function renderProductCards(products) {
+    var grid = document.getElementById('product-cards');
+    if (!grid) return;
+
+    var cards = '';
+    products.forEach(function(p) {
+        if (!p.image_url) return;
+        cards +=
+            '<div class="product-card">' +
+                '<img src="' + escapeHtml(p.image_url) + '" alt="' + escapeHtml(p.name) + '">' +
+                '<h3>' + escapeHtml(p.name) + '</h3>' +
+                '<p class="product-price">KES ' + priceLabel(p.price) + '</p>' +
+                addCartButton(p) +
+            '</div>';
+    });
+    if (cards) grid.innerHTML = cards;
+}
+
+// Best Sellers list from the is_best_seller flag.
+function renderBestSellers(products) {
+    var list = document.getElementById('best-sellers');
+    if (!list) return;
+
+    var items = products.filter(function(p) { return p.is_best_seller; })
+                        .map(function(p) { return '<li>' + escapeHtml(p.name) + '</li>'; })
+                        .join('');
+    if (items) list.innerHTML = items;
 }
 
 // Fetch products from the DB and replace the static fallback rows.
