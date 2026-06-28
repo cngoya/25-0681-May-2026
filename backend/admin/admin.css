@@ -132,5 +132,53 @@ body {
 .login-box button { width: 100%; padding: 12px; font-size: 1.05em; border-radius: 22px; }
 .login-error { background: #ffebee; color: #c62828; padding: 10px; border-radius: 8px; margin-bottom: 14px; font-size: 0.9em; }
 
+/* ─── Toolbar + action buttons ─── */
+.toolbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+.btn-add {
+    background: linear-gradient(135deg, #2e7d32, #66bb6a); color: #fff;
+    padding: 9px 18px; border-radius: 18px; text-decoration: none; font-weight: bold;
+}
+.btn-add:hover { filter: brightness(1.05); }
+
+.admin-table td.actions { display: flex; gap: 8px; align-items: center; }
+.btn-edit {
+    background: #e3f2fd; color: #1565c0; padding: 6px 14px; border-radius: 14px;
+    text-decoration: none; font-weight: 600; font-size: 0.85em;
+}
+.btn-edit:hover { background: #bbdefb; }
+.actions form { margin: 0; }
+.btn-delete {
+    background: #ffebee; color: #c62828; border: none; padding: 6px 14px;
+    border-radius: 14px; cursor: pointer; font-weight: 600; font-size: 0.85em;
+}
+.btn-delete:hover { background: #ffcdd2; }
+
+/* ─── Product add/edit form ─── */
+.product-form {
+    background: #fff; border-radius: 14px; padding: 24px;
+    box-shadow: 0 3px 12px rgba(194,24,91,0.1); margin-top: 10px;
+}
+.pf-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px;
+}
+.product-form label { display: flex; flex-direction: column; gap: 5px; font-weight: 600; color: #880e4f; font-size: 0.9em; }
+.product-form input, .product-form select, .product-form textarea {
+    padding: 10px 12px; border: 2px solid #f0d6e0; border-radius: 9px;
+    font-size: 1em; font-family: inherit; font-weight: normal; color: #333;
+}
+.product-form input:focus, .product-form select:focus, .product-form textarea:focus {
+    outline: none; border-color: #c2185b; box-shadow: 0 0 0 3px rgba(194,24,91,0.12);
+}
+.pf-full { display: flex; flex-direction: column; gap: 5px; margin-top: 16px; }
+.product-form textarea { resize: vertical; }
+.pf-checks { display: flex; gap: 24px; margin: 16px 0; }
+.pf-check { flex-direction: row; align-items: center; gap: 8px; font-weight: normal; }
+.btn-save {
+    background: linear-gradient(135deg, #2e7d32, #66bb6a); color: #fff; border: none;
+    padding: 12px 28px; border-radius: 22px; cursor: pointer; font-size: 1.05em; font-weight: bold;
+}
+.btn-save:hover { filter: brightness(1.05); }
+.product-form .error-msg { color: #c62828; font-size: 0.82em; font-weight: normal; }
+
 /* ─── Footer ─── */
 .admin-footer { text-align: center; color: #aaa; padding: 20px; font-size: 0.85em; }
