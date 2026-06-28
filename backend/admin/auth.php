@@ -18,8 +18,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 function admin_password(): string
 {
-    $pass = getenv('ADMIN_PASSWORD');
-    return $pass !== false ? $pass : '';
+    return (string) env_get('ADMIN_PASSWORD', '');
 }
 
 function is_logged_in(): bool

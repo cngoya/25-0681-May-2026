@@ -39,10 +39,34 @@ function load_env(string $path): void
             continue;
         }
 
-        putenv("$key=$value");
+        // putenv() is disabled on some shared hosts, so we always populate
+        // $_ENV / $_SERVER too and read via env_get() below.
+        @putenv("$key=$value");
         $_ENV[$key]    = $value;
         $_SERVER[$key] = $value;
     }
+}
+endif;
+
+if (!function_exists('env_get')):
+/**
+ * Read a configuration value from any place it might live, in order:
+ * a real environment variable, then $_ENV / $_SERVER (populated from .env).
+ * Robust to hosts where putenv()/getenv() are restricted.
+ */
+function env_get(string $key, $default = null)
+{
+    $val = getenv($key);
+    if ($val !== false) {
+        return $val;
+    }
+    if (array_key_exists($key, $_ENV)) {
+        return $_ENV[$key];
+    }
+    if (array_key_exists($key, $_SERVER)) {
+        return $_SERVER[$key];
+    }
+    return $default;
 }
 endif;
 

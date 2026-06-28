@@ -11,10 +11,10 @@
 require_once __DIR__ . '/env.php';
 
 return [
-    'host'    => getenv('DB_HOST') ?: '127.0.0.1',
-    'port'    => getenv('DB_PORT') ?: '3306',
-    'name'    => getenv('DB_NAME') ?: 'bloom_petal',
-    'user'    => getenv('DB_USER') ?: 'root',
-    'pass'    => getenv('DB_PASS') !== false ? getenv('DB_PASS') : '',
+    'host'    => env_get('DB_HOST', '127.0.0.1'),
+    'port'    => env_get('DB_PORT', '3306'),
+    'name'    => env_get('DB_NAME', 'bloom_petal'),
+    'user'    => env_get('DB_USER', 'root'),
+    'pass'    => env_get('DB_PASS', ''),
     'charset' => 'utf8mb4',
 ];
