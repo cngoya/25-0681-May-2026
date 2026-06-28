@@ -452,7 +452,8 @@ section#about::after { content: ""; display: block; clear: both; }
 .signup-form input[type="text"],
 .signup-form input[type="email"],
 .signup-form input[type="tel"],
-.signup-form select {
+.signup-form select,
+.signup-form textarea {
     width: 100%;
     padding: 12px 15px;
     border: 2px solid #f8bbd0;
@@ -462,8 +463,10 @@ section#about::after { content: ""; display: block; clear: both; }
     background: white;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
+.signup-form textarea { resize: vertical; }
 .signup-form input:focus,
-.signup-form select:focus {
+.signup-form select:focus,
+.signup-form textarea:focus {
     outline: none;
     border-color: #c2185b;
     box-shadow: 0 0 0 3px rgba(194, 24, 91, 0.15);

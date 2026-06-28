@@ -496,3 +496,76 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+// ═══════════════════════════════════════════
+//   CONTACT FORM
+// ═══════════════════════════════════════════
+
+document.addEventListener('DOMContentLoaded', function() {
+    var contactForm = document.getElementById('contact-form');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var name    = document.getElementById('contact-name').value.trim();
+        var email   = document.getElementById('contact-email').value.trim();
+        var phone   = document.getElementById('contact-phone').value.trim();
+        var dept    = document.getElementById('contact-department').value;
+        var message = document.getElementById('contact-message').value.trim();
+
+        // Client-side checks (server validates again).
+        var valid = true;
+        if (!isValidName(name))           { showError('contact-name', 'Please enter a valid name (letters only, at least 2 characters).'); valid = false; } else { clearError('contact-name'); }
+        if (!isValidEmail(email))         { showError('contact-email', 'Please enter a valid email (e.g. cleon@gmail.com).'); valid = false; } else { clearError('contact-email'); }
+        if (phone !== '' && !isValidPhone(phone)) { showError('contact-phone', 'Please enter a valid phone number, or leave it blank.'); valid = false; } else { clearError('contact-phone'); }
+        if (message.length < 10)          { showError('contact-message', 'Please enter a message of at least 10 characters.'); valid = false; } else { clearError('contact-message'); }
+        if (!valid) return;
+
+        var submitBtn = contactForm.querySelector('button[type="submit"]');
+        var originalBtnText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+
+        fetch('backend/contact.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name: name, email: email, phone: phone, department: dept, message: message })
+        })
+        .then(function(response) {
+            return response.json().then(function(data) { return { status: response.status, data: data }; });
+        })
+        .then(function(result) {
+            var data = result.data;
+
+            if (result.status === 400 && data.errors) {
+                Object.keys(data.errors).forEach(function(field) {
+                    showError('contact-' + field, data.errors[field]);
+                });
+                return;
+            }
+
+            if (!data.ok) {
+                showError('contact-email', data.message || 'Could not send your message. Please try again.');
+                return;
+            }
+
+            var successMsg = document.getElementById('contact-success');
+            successMsg.innerHTML = '🌸 Thank you, <strong>' + name + '</strong>! Your message has been received. We\'ll get back to you soon.';
+            successMsg.classList.add('show');
+            contactForm.reset();
+
+            setTimeout(function() {
+                successMsg.classList.remove('show');
+            }, 5000);
+        })
+        .catch(function(err) {
+            console.error('Contact request failed:', err);
+            showError('contact-email', 'Could not reach the server. Is the backend running?');
+        })
+        .finally(function() {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalBtnText;
+        });
+    });
+});
