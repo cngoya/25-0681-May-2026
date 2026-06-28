@@ -380,27 +380,101 @@ function goToCheckout() {
     openModal('checkout-modal');
 }
 
+// ─── Render the product & bouquet tables from the database ───
+var DISPLAY = {
+    availability: { in_stock: 'In Stock', limited: 'Limited', out_of_stock: 'Out of Stock' },
+    care_level:   { very_easy: 'Very Easy', easy: 'Easy', moderate: 'Moderate', hard: 'Hard' },
+    delivery:     { same_day: 'Same Day', next_day: 'Next Day' }
+};
+
+function escapeHtml(s) {
+    return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+function priceLabel(n) { return Number(n).toLocaleString('en-KE'); }
+
+function addCartButton(p) {
+    if (p.availability === 'out_of_stock') {
+        return '<button class="add-cart" disabled>Sold out</button>';
+    }
+    return '<button class="add-cart" data-id="' + p.id +
+           '" data-name="' + escapeHtml(p.name) +
+           '" data-price="' + p.price + '">Add 🛒</button>';
+}
+
+function renderCatalogue(products) {
+    var catBody = document.getElementById('catalogue-tbody');
+    var bqBody  = document.getElementById('bouquets-tbody');
+    var catRows = '', bqRows = '';
+
+    products.forEach(function(p) {
+        if (p.kind === 'bouquet') {
+            bqRows +=
+                '<tr><td>' + escapeHtml(p.name) + '</td>' +
+                '<td>' + escapeHtml(p.main_flower || '—') + '</td>' +
+                '<td>' + escapeHtml(p.occasion || '—') + '</td>' +
+                '<td>' + priceLabel(p.price) + '</td>' +
+                '<td>' + (DISPLAY.delivery[p.delivery_speed] || '—') + '</td>' +
+                '<td>' + addCartButton(p) + '</td></tr>';
+        } else {
+            catRows +=
+                '<tr><td>' + escapeHtml(p.name) + '</td>' +
+                '<td>' + escapeHtml(p.category || '—') + '</td>' +
+                '<td>' + (DISPLAY.care_level[p.care_level] || '—') + '</td>' +
+                '<td>' + priceLabel(p.price) + '</td>' +
+                '<td>' + (DISPLAY.availability[p.availability] || '—') + '</td>' +
+                '<td>' + addCartButton(p) + '</td></tr>';
+        }
+    });
+
+    if (catBody && catRows) catBody.innerHTML = catRows;
+    if (bqBody && bqRows) bqBody.innerHTML = bqRows;
+}
+
+// Fetch products from the DB and replace the static fallback rows.
+function loadCatalogueFromDB() {
+    fetch('backend/products.php')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            if (data && data.ok && data.products && data.products.length) {
+                renderCatalogue(data.products);
+            }
+        })
+        .catch(function(err) {
+            // Backend unavailable — keep the static fallback rows.
+            console.warn('Could not load catalogue from DB; using static rows.', err);
+        });
+}
+
 // Wire up the "Add 🛒" buttons and the checkout form once the page loads.
 document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
 
-    document.querySelectorAll('.add-cart').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-            var id = parseInt(btn.getAttribute('data-id'), 10);
-            var name = btn.getAttribute('data-name');
-            var price = parseFloat(btn.getAttribute('data-price'));
-            addToCart(id, name, price);
+    // Event delegation: works for both the static buttons and any rows we
+    // render dynamically from the database (see renderCatalogue below).
+    document.addEventListener('click', function(e) {
+        var btn = e.target.closest('.add-cart');
+        if (!btn || btn.disabled) return;
 
-            // Quick visual confirmation.
-            var original = btn.textContent;
-            btn.textContent = 'Added ✓';
-            btn.disabled = true;
-            setTimeout(function() {
-                btn.textContent = original;
-                btn.disabled = false;
-            }, 900);
-        });
+        var id = parseInt(btn.getAttribute('data-id'), 10);
+        var name = btn.getAttribute('data-name');
+        var price = parseFloat(btn.getAttribute('data-price'));
+        addToCart(id, name, price);
+
+        // Quick visual confirmation.
+        var original = btn.textContent;
+        btn.textContent = 'Added ✓';
+        btn.disabled = true;
+        setTimeout(function() {
+            btn.textContent = original;
+            btn.disabled = false;
+        }, 900);
     });
+
+    // Replace the static product/bouquet tables with live data from the DB.
+    loadCatalogueFromDB();
 
     var checkoutForm = document.getElementById('checkout-form');
     if (checkoutForm) {
