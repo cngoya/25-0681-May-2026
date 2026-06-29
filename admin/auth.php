@@ -9,8 +9,8 @@
  *   - h()              → HTML-escape a value for safe output
  */
 
-require_once __DIR__ . '/../env.php';   // loads backend/.env into getenv()
-require_once __DIR__ . '/../db.php';    // defines db()
+require_once __DIR__ . '/../backend/env.php';   // loads backend/.env into getenv()
+require_once __DIR__ . '/../backend/db.php';    // defines db()
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

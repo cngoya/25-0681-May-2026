@@ -69,7 +69,7 @@ Control panel → **Select PHP Version** → pick **PHP 8.0 or newer**
 ## 7. Test it 🎉
 - Visit **`http://your-subdomain.infinityfreeapp.com`** → register, add to cart,
   checkout, send a contact message.
-- Admin: **`http://your-subdomain.infinityfreeapp.com/backend/admin/`**
+- Admin: **`http://your-subdomain.infinityfreeapp.com/admin/`**
   → log in with your `ADMIN_PASSWORD`.
 
 ---
