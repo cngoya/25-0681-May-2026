@@ -3,7 +3,7 @@
  * One-time database installer for shared hosting.
  *
  * Visit  http://your-site/install.php?run=bloom  ONCE in your browser to
- * create the tables and load the catalogue, then DELETE this file.
+ * create the tables and load the catalogue, then DELETE the file.
  *
  * It runs on the host, so it can reach the host's MySQL (which blocks
  * outside connections). Safe to re-run: tables use IF NOT EXISTS and the
