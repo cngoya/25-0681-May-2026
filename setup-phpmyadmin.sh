@@ -5,7 +5,6 @@
 #  Copies the phpMyAdmin that ships with XAMPP into ./phpmyadmin and writes
 #  a config pointing at the standalone MySQL on 127.0.0.1:3306. The DB
 #  password is read from backend/.env (so it is never committed).
-#
 #  The phpmyadmin/ folder is gitignored; run this once after cloning.
 #
 #  Usage:  ./setup-phpmyadmin.sh
