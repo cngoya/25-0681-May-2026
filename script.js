@@ -9,7 +9,7 @@ function closeModal(id) {
     document.getElementById(id).classList.remove('active');
 }
 
-// ─── Promo chime (gentle two-note sound, generated in-browser) ───
+// ─── Promo chime (gentle two-note sound, generated in-browser); ───
 function playPromoSound() {
     try {
         const AudioCtx = window.AudioContext || window.webkitAudioContext;
