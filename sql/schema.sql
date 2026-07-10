@@ -10,7 +10,7 @@
 --    mysql -u root -p < sql/schema.sql
 --  Then load the catalogue/reference data:
 --    mysql -u root -p < sql/seed.sql
--- ═══════════════════════════════════════════
+
 
 CREATE DATABASE IF NOT EXISTS bloom_petal
     CHARACTER SET utf8mb4
