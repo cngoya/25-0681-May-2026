@@ -10,7 +10,7 @@
 --  re-run: all tables use CREATE TABLE IF NOT EXISTS, so existing data
 --  (e.g. real sign-ups in `users`) is never dropped.
 --
---  Load it:
+--  Load it;
 --    mysql -u root -p < sql/schema.sql
 --  Then load the catalogue/reference data:
 --    mysql -u root -p < sql/seed.sql
